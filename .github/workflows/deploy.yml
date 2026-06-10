@@ -20,6 +20,7 @@ jobs:
   build:
     name: Build static website
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -34,16 +35,24 @@ jobs:
           test -f robots.txt
           test -f assets/style.css
           test -f assets/script.js
+          test -f 404.html
           echo "Core website files found."
 
       - name: Count generated SEO pages
         run: |
-          HTML_COUNT=$(find coldway_comforts_website -name "*.html" | wc -l)
+          HTML_COUNT=$(find . -name "*.html" | wc -l)
           URL_COUNT=$(grep -o "<loc>" sitemap.xml | wc -l || true)
+
           echo "HTML pages: $HTML_COUNT"
           echo "Sitemap URLs: $URL_COUNT"
+
           if [ "$HTML_COUNT" -lt 100 ]; then
             echo "Expected large local SEO website, but only $HTML_COUNT HTML files found."
+            exit 1
+          fi
+
+          if [ "$URL_COUNT" -lt 100 ]; then
+            echo "Expected large sitemap, but only $URL_COUNT URLs found."
             exit 1
           fi
 
@@ -54,15 +63,17 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: coldway_comforts_website
+          path: .
 
   deploy:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
