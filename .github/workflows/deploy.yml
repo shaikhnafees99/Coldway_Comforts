@@ -1,0 +1,69 @@
+name: Build and Deploy Coldway Comforts Website
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build static website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Validate website files
+        run: |
+          test -f index.html
+          test -f sitemap.xml
+          test -f robots.txt
+          test -f assets/style.css
+          test -f assets/script.js
+          echo "Core website files found."
+
+      - name: Count generated SEO pages
+        run: |
+          HTML_COUNT=$(find coldway_comforts_website -name "*.html" | wc -l)
+          URL_COUNT=$(grep -o "<loc>" sitemap.xml | wc -l || true)
+          echo "HTML pages: $HTML_COUNT"
+          echo "Sitemap URLs: $URL_COUNT"
+          if [ "$HTML_COUNT" -lt 100 ]; then
+            echo "Expected large local SEO website, but only $HTML_COUNT HTML files found."
+            exit 1
+          fi
+
+      - name: Add GitHub Pages static marker
+        run: |
+          touch .nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: coldway_comforts_website
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
