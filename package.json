@@ -4,7 +4,7 @@
   "private": true,
   "description": "Static SEO website for Coldway Comforts with GitHub Pages deployment workflow.",
   "scripts": {
-    "build": "echo 'Static website ready in '",
+    "build": "echo 'Static website ready in coldway_comforts_website/'",
     "pages:count": "find coldway_comforts_website -name '*.html' | wc -l"
   }
 }
