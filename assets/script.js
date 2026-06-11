@@ -14,3 +14,30 @@ END:VCARD`;
  const blob=new Blob([vcard],{type:'text/vcard'}); const url=URL.createObjectURL(blob); const a=document.createElement('a');
  a.href=url; a.download='Coldway-Comforts.vcf'; a.click(); URL.revokeObjectURL(url);
 }
+
+function initAreaSearch(){
+ const input=document.getElementById('areaSearch');
+ const list=document.querySelector('.all-areas');
+ const meta=document.getElementById('areaSearchMeta');
+ if(!input||!list||!meta) return;
+ const links=[...list.querySelectorAll('a')];
+ const total=links.length;
+ const update=()=>{
+  const query=input.value.trim().toLowerCase();
+  let shown=0;
+  links.forEach(link=>{
+   const text=link.textContent.toLowerCase();
+   const href=link.getAttribute('href').toLowerCase().replace(/[-/\\.]/g,' ');
+   const match=!query||text.includes(query)||href.includes(query);
+   link.classList.toggle('is-hidden',!match);
+   if(match) shown+=1;
+  });
+  meta.textContent=query
+   ? (shown?`Showing ${shown} matching service areas`:'No exact area match. Call us and share your location.')
+   : `Showing ${total} service areas`;
+ };
+ input.addEventListener('input',update);
+ update();
+}
+
+document.addEventListener('DOMContentLoaded',initAreaSearch);
