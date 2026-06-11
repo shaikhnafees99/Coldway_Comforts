@@ -40,4 +40,25 @@ function initAreaSearch(){
  update();
 }
 
-document.addEventListener('DOMContentLoaded',initAreaSearch);
+function initReveal(){
+ const items=[...document.querySelectorAll('.section,.card,.service-point,.brand-card,.area-finder')];
+ items.forEach(item=>item.classList.add('reveal'));
+ if(!('IntersectionObserver' in window)){
+  items.forEach(item=>item.classList.add('in-view'));
+  return;
+ }
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add('in-view');
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+ items.forEach(item=>observer.observe(item));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+ initAreaSearch();
+ initReveal();
+});

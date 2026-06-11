@@ -7,6 +7,7 @@ const errors = [];
 const warnings = [];
 const requiredRootFiles = [
   "CNAME",
+  "favicon.ico",
   "favicon.png",
   "apple-touch-icon.png",
   "site.webmanifest",
@@ -69,8 +70,8 @@ for (const file of htmlFiles) {
   if (!/<meta\s+name=["']description["']/i.test(html)) warnings.push(`${rel}: missing meta description`);
   if (!/<meta\s+name=["']viewport["']/i.test(html)) warnings.push(`${rel}: missing viewport`);
   if (!/<h1[\s>]/i.test(html)) warnings.push(`${rel}: missing h1`);
-  if (!/<link\s+rel=["']icon["']\s+href=["']\/favicon\.png["']/i.test(html)) {
-    errors.push(`${rel}: missing root favicon link`);
+  if (!/<link\s+rel=["']icon["'][^>]+href=["']\/favicon\.ico["']/i.test(html)) {
+    errors.push(`${rel}: missing root favicon.ico link`);
   }
   if (!/<link\s+rel=["']manifest["']\s+href=["']\/site\.webmanifest["']/i.test(html)) {
     errors.push(`${rel}: missing web manifest link`);
