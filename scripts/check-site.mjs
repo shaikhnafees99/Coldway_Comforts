@@ -43,6 +43,15 @@ function normalizeLink(value, fromFile) {
   return decoded.endsWith("/") ? path.join(base, "index.html") : base;
 }
 
+function nodeHasType(node, type) {
+  const value = node?.["@type"];
+  return Array.isArray(value) ? value.includes(type) : value === type;
+}
+
+function graphNodes(document) {
+  return Array.isArray(document?.["@graph"]) ? document["@graph"] : [document];
+}
+
 walk(root);
 
 for (const file of [...requiredRootFiles, ...requiredAssetFiles]) {
@@ -52,6 +61,8 @@ for (const file of [...requiredRootFiles, ...requiredAssetFiles]) {
 for (const file of htmlFiles) {
   const html = readFileSync(file, "utf8");
   const rel = path.relative(root, file);
+  const normalizedRel = rel.replaceAll(path.sep, "/");
+  const schemaNodes = [];
 
   if (/washing-machine|doorstep-appliance/i.test(rel)) errors.push(`${rel}: stale service slug`);
   if (!/<title>[^<]+<\/title>/i.test(html)) warnings.push(`${rel}: missing title`);
@@ -72,9 +83,43 @@ for (const file of htmlFiles) {
 
   for (const match of html.matchAll(/<script\s+type=["']application\/ld\+json["']>(.*?)<\/script>/gis)) {
     try {
-      JSON.parse(match[1]);
+      schemaNodes.push(...graphNodes(JSON.parse(match[1])));
     } catch (error) {
       errors.push(`${rel}: invalid JSON-LD (${error.message})`);
+    }
+  }
+
+  if (!schemaNodes.some((node) => nodeHasType(node, "LocalBusiness"))) {
+    errors.push(`${rel}: missing LocalBusiness schema`);
+  }
+  const business = schemaNodes.find((node) => nodeHasType(node, "LocalBusiness"));
+  const offerNames = business?.hasOfferCatalog?.itemListElement
+    ?.map((offer) => offer?.itemOffered?.name)
+    .filter(Boolean) ?? [];
+  for (const requiredOffer of [
+    "Doorstep AC and Refrigerator Service",
+    "Cassette AC Service",
+    "Tower AC Service",
+    "Central AC Service",
+  ]) {
+    if (!offerNames.includes(requiredOffer)) {
+      errors.push(`${rel}: missing ${requiredOffer} in business offer schema`);
+    }
+  }
+
+  if (/^(area|local|service)\//.test(normalizedRel)) {
+    const service = schemaNodes.find((node) => nodeHasType(node, "Service") && /#service$/.test(node?.["@id"] ?? ""));
+    if (!service) {
+      errors.push(`${rel}: missing page-level Service schema`);
+    } else {
+      if (!service.areaServed?.name) errors.push(`${rel}: Service schema missing areaServed name`);
+      if (service.provider?.["@id"] !== "https://coldwaycomforts.com/#business") {
+        errors.push(`${rel}: Service schema missing Coldway provider`);
+      }
+    }
+    const page = schemaNodes.find((node) => nodeHasType(node, "WebPage"));
+    if (!page?.mainEntity?.["@id"]?.endsWith("#service")) {
+      errors.push(`${rel}: WebPage schema missing Service mainEntity`);
     }
   }
 
