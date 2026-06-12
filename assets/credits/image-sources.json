@@ -1,0 +1,41 @@
+{
+  "note": "Service photos are stored locally for performance. Pexels photos are free to use under the Pexels license; attribution is not required, but source tracking is kept for maintenance.",
+  "sources": [
+    {
+      "asset": "assets/services/ac-service-photo.jpg",
+      "source": "https://www.pexels.com/photo/technician-inspecting-outdoor-hvac-unit-32497161/"
+    },
+    {
+      "asset": "assets/services/ac-repair-photo.jpg",
+      "source": "https://www.pexels.com/photo/technician-inspecting-outdoor-hvac-unit-32497161/"
+    },
+    {
+      "asset": "assets/services/ac-installation-photo.jpg",
+      "source": "https://www.pexels.com/photo/air-conditioner-on-outside-wall-20046692/"
+    },
+    {
+      "asset": "assets/services/ac-gas-filling-photo.jpg",
+      "source": "https://www.pexels.com/photo/technician-inspecting-outdoor-hvac-unit-32497161/"
+    },
+    {
+      "asset": "assets/services/commercial-large-space-photo.jpg",
+      "source": "https://www.pexels.com/photo/industrial-air-conditioning-units-on-warehouse-wall-28726413/"
+    },
+    {
+      "asset": "assets/services/new-ac-sale-photo.jpg",
+      "source": "https://www.pexels.com/photo/air-conditioner-on-outside-wall-20046692/"
+    },
+    {
+      "asset": "assets/services/old-ac-purchase-photo.jpg",
+      "source": "https://www.pexels.com/photo/view-of-the-air-conditioning-unit-outside-the-building-27134985/"
+    },
+    {
+      "asset": "assets/services/scrap-ac-pickup-photo.jpg",
+      "source": "https://www.pexels.com/search/air%20conditioner%20repair/"
+    },
+    {
+      "asset": "assets/services/ac-refrigerator-service-photo.jpg",
+      "source": "https://www.pexels.com/photo/a-woman-opening-a-fridge-8805274/"
+    }
+  ]
+}

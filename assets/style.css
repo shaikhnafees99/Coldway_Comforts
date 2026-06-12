@@ -572,6 +572,66 @@ h1 span {
   margin-bottom: 6px;
 }
 
+.seo-table-wrap {
+  margin-top: 26px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--soft-shadow);
+  background: #fff;
+}
+
+.seo-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.seo-table th,
+.seo-table td {
+  padding: 15px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.seo-table th {
+  color: #233c5f;
+  background: #edf9fb;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.seo-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.seo-table td:first-child {
+  color: #233c5f;
+  font-weight: 900;
+}
+
+.local-proof {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.local-proof div {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: var(--soft-shadow);
+}
+
+.local-proof b {
+  display: block;
+  color: var(--cyan);
+  margin-bottom: 6px;
+}
+
 .area-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -866,6 +926,7 @@ h1 span {
   .grid,
   .ac-types,
   .service-points,
+  .local-proof,
   .area-summary {
     grid-template-columns: 1fr;
   }
@@ -996,269 +1057,72 @@ h1 span {
   }
 }
 
-/* ================================
-   FINAL HEADER + TOP CALL ALIGNMENT FIX
-   Paste-ready full CSS generated for Coldway Comforts
-   Layout: Call Now + stacked contact numbers, all centered
-================================ */
-
-.top-call {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  display: grid !important;
-  grid-template-columns: auto auto !important;
-  grid-template-areas:
-    "label phone1"
-    "label phone2"
-    "service service" !important;
-  justify-content: center !important;
-  align-items: center !important;
-  column-gap: 10px !important;
-  row-gap: 5px !important;
-  background: linear-gradient(90deg, #0b8192, #17466c 58%, #263c66) !important;
-  color: #fff !important;
-  padding: 9px 12px !important;
-  text-align: center !important;
-  font-weight: 800 !important;
-  letter-spacing: .2px !important;
-}
-
+/* Final responsive polish. */
 .top-call-label {
-  grid-area: label !important;
-  align-self: center !important;
-  justify-self: end !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: auto !important;
-  font-size: 16px !important;
-  line-height: 1.1 !important;
-  white-space: nowrap !important;
-}
-
-.top-call a:nth-of-type(1) {
-  grid-area: phone1 !important;
-}
-
-.top-call a:nth-of-type(2) {
-  grid-area: phone2 !important;
-}
-
-.top-call a {
-  justify-self: start !important;
-  background: #fff !important;
-  color: #0b7180 !important;
-  min-width: 150px !important;
-  padding: 7px 12px !important;
-  border-radius: 999px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, .12) !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  font-size: 14px !important;
-  line-height: 1.1 !important;
-}
-
-.top-call-text {
-  grid-area: service !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: auto !important;
-  width: 100% !important;
-  margin-top: 1px !important;
-  text-align: center !important;
-  font-size: 16px !important;
-  line-height: 1.15 !important;
-}
-
-.nav {
-  position: sticky !important;
-  top: 96px !important;
-  z-index: 999 !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  flex-wrap: wrap !important;
-  gap: 14px !important;
-  min-height: 78px !important;
-  padding: 10px 5% !important;
-  background: rgba(255, 255, 255, .96) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid var(--line) !important;
-  box-shadow: 0 8px 22px rgba(20, 55, 80, .05) !important;
-}
-
-.brand {
-  display: flex !important;
-  align-items: center !important;
-  min-width: 220px !important;
-}
-
-.brand img {
-  width: 220px !important;
-  height: 64px !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  display: block !important;
-}
-
-.brand div {
-  display: none !important;
-}
-
-.menu {
-  display: flex !important;
-  gap: 8px !important;
-  font-weight: 700 !important;
-  color: #334861 !important;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  white-space: nowrap;
 }
 
 .menu a {
-  border: 1px solid transparent !important;
-  border-radius: 999px !important;
-  padding: 8px 13px !important;
-  transition: .22s !important;
-  white-space: nowrap !important;
+  white-space: nowrap;
 }
 
-.menu a:hover,
-.menu a.active {
-  border-color: var(--line) !important;
-  background: #eefbfe !important;
-  color: #0a7785 !important;
-}
-
-/* Services/content fallback: content stays visible even if reveal animation fails */
 .section,
 .card,
 .service-point,
 .brand-card,
 .area-finder {
-  visibility: visible !important;
-}
-
-.reveal,
-.reveal.in-view {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+  visibility: visible;
 }
 
 @media (max-width: 900px) {
   .top-call {
-    grid-template-columns: auto auto !important;
-    grid-template-areas:
-      "label phone1"
-      "label phone2"
-      "service service" !important;
-    column-gap: 9px !important;
-    row-gap: 5px !important;
-    padding: 9px 8px !important;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 8px;
+    overflow-x: hidden;
   }
 
   .top-call-label {
-    grid-area: label !important;
-    align-self: center !important;
-    justify-self: end !important;
-    font-size: 15px !important;
-    line-height: 1.1 !important;
+    min-height: auto;
+    font-size: 13px;
+    line-height: 1.1;
   }
 
   .top-call a {
-    min-width: 145px !important;
-    padding: 7px 9px !important;
-    font-size: 13px !important;
-    line-height: 1.1 !important;
+    flex: 0 0 auto;
+    padding: 6px 8px;
+    font-size: 12px;
+    line-height: 1.1;
+    white-space: nowrap;
   }
 
   .top-call-text {
-    font-size: 15px !important;
-    line-height: 1.15 !important;
+    display: none;
   }
 
   .nav {
-    position: sticky !important;
-    top: 100px !important;
-    min-height: auto !important;
-    padding: 8px 5% 10px !important;
-    justify-content: center !important;
-  }
-
-  .brand {
-    min-width: 0 !important;
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  .brand img {
-    width: 190px !important;
-    height: 56px !important;
-  }
-
-  .menu {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    overflow-x: auto !important;
-    gap: 7px !important;
-    padding-bottom: 2px !important;
-  }
-
-  .menu a {
-    background: #fff !important;
-    border: 1px solid var(--line) !important;
-    padding: 7px 10px !important;
-    white-space: nowrap !important;
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 430px) {
-  .top-call {
-    column-gap: 8px !important;
-    row-gap: 5px !important;
-    padding: 8px 7px !important;
-  }
-
-  .top-call-label {
-    font-size: 15px !important;
-  }
-
-  .top-call a {
-    min-width: 142px !important;
-    font-size: 12.5px !important;
-    padding: 7px 8px !important;
-  }
-
-  .top-call-text {
-    font-size: 14px !important;
-  }
-
-  .nav {
-    top: 98px !important;
+    position: relative;
+    top: auto;
   }
 }
 
 @media (max-width: 360px) {
   .top-call {
-    column-gap: 6px !important;
+    gap: 4px;
+    padding-inline: 5px;
   }
 
-  .top-call-label {
-    font-size: 14px !important;
+  .top-call-label,
+  .top-call a {
+    font-size: 11.5px;
   }
 
   .top-call a {
-    min-width: 132px !important;
-    font-size: 12px !important;
-    padding: 7px 6px !important;
-  }
-
-  .top-call-text {
-    font-size: 13px !important;
+    padding-inline: 6px;
   }
 }
