@@ -1,3 +1,17 @@
 User-agent: *
 Allow: /
 Sitemap: https://coldwaycomforts.com/sitemap.xml
+Sitemap: https://coldwaycomforts.com/sitemap-core.xml
+Sitemap: https://coldwaycomforts.com/sitemap-services.xml
+Sitemap: https://coldwaycomforts.com/sitemap-areas.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-ac-service.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-ac-repair.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-ac-installation.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-ac-maintenance.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-ac-gas-filling.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-commercial-ac-service.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-doorstep-ac-refrigerator-service.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-refrigerator-repair.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-new-ac-sale.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-old-ac-purchase.xml
+Sitemap: https://coldwaycomforts.com/sitemap-local-scrap-ac-buying.xml

@@ -136,17 +136,47 @@ const sitemapPath = path.join(root, "sitemap.xml");
 if (existsSync(sitemapPath)) {
   const sitemap = readFileSync(sitemapPath, "utf8");
   if (/https:\/\/www\.coldwaycomforts\.com/i.test(sitemap)) errors.push("sitemap: references www domain");
+  if (/http:\/\/coldwaycomforts\.com/i.test(sitemap)) errors.push("sitemap: references http domain");
+
+  const sitemapFiles = new Set(["sitemap.xml"]);
   const sitemapLocs = new Set();
-  for (const match of sitemap.matchAll(/<loc>(https?:\/\/coldwaycomforts\.com\/[^<]*)<\/loc>/gi)) {
-    const url = new URL(match[1]);
-    sitemapLocs.add(url.pathname === "/" ? "/index.html" : url.pathname);
-    const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
-    const local = path.join(root, decodeURIComponent(pathname.slice(1)));
-    if (!existsSync(local)) errors.push(`sitemap: missing ${url.pathname}`);
+
+  function validateSitemapFile(file) {
+    const full = path.join(root, file);
+    if (!existsSync(full)) {
+      errors.push(`sitemap: missing ${file}`);
+      return;
+    }
+
+    const xml = readFileSync(full, "utf8");
+    if (/https:\/\/www\.coldwaycomforts\.com/i.test(xml)) errors.push(`${file}: references www domain`);
+    if (/http:\/\/coldwaycomforts\.com/i.test(xml)) errors.push(`${file}: references http domain`);
+
+    for (const match of xml.matchAll(/<loc>(https?:\/\/coldwaycomforts\.com\/[^<]*)<\/loc>/gi)) {
+      const url = new URL(match[1]);
+      const pathname = url.pathname === "/" ? "/index.html" : url.pathname;
+
+      if (/^\/sitemap.*\.xml$/i.test(url.pathname)) {
+        const child = decodeURIComponent(url.pathname.slice(1));
+        sitemapFiles.add(child);
+        continue;
+      }
+
+      sitemapLocs.add(pathname);
+      const local = path.join(root, decodeURIComponent(pathname.slice(1)));
+      if (!existsSync(local)) errors.push(`${file}: missing ${url.pathname}`);
+    }
   }
+
+  validateSitemapFile("sitemap.xml");
+  for (const file of [...sitemapFiles]) {
+    if (file !== "sitemap.xml") validateSitemapFile(file);
+  }
+
   for (const file of htmlFiles) {
     const rel = path.relative(root, file).replaceAll(path.sep, "/");
     if (rel === "404.html") continue;
+    if (/<meta\s+name=["']robots["'][^>]*noindex/i.test(readFileSync(file, "utf8"))) continue;
     const pathname = rel === "index.html" ? "/index.html" : `/${rel}`;
     if (!sitemapLocs.has(pathname)) errors.push(`sitemap: missing URL for ${rel}`);
   }
