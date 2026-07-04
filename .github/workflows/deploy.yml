@@ -41,10 +41,10 @@ jobs:
       - name: Count generated SEO pages
         run: |
           HTML_COUNT=$(find . -name "*.html" | wc -l)
-          URL_COUNT=$(grep -o "<loc>" sitemap.xml | wc -l || true)
+          URL_COUNT=$(grep -h -o "<url>" sitemap-*.xml | wc -l || true)
 
           echo "HTML pages: $HTML_COUNT"
-          echo "Sitemap URLs: $URL_COUNT"
+          echo "Grouped sitemap page URLs: $URL_COUNT"
 
           if [ "$HTML_COUNT" -lt 100 ]; then
             echo "Expected large local SEO website, but only $HTML_COUNT HTML files found."
@@ -52,9 +52,12 @@ jobs:
           fi
 
           if [ "$URL_COUNT" -lt 100 ]; then
-            echo "Expected large sitemap, but only $URL_COUNT URLs found."
+            echo "Expected large grouped sitemaps, but only $URL_COUNT page URLs found."
             exit 1
           fi
+
+      - name: Run site integrity checks
+        run: npm run test:site
 
       - name: Add GitHub Pages static marker
         run: |
