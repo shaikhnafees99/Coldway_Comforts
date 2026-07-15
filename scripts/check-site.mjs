@@ -70,6 +70,12 @@ for (const file of htmlFiles) {
   if (!/<meta\s+name=["']description["']/i.test(html)) warnings.push(`${rel}: missing meta description`);
   if (!/<meta\s+name=["']viewport["']/i.test(html)) warnings.push(`${rel}: missing viewport`);
   if (!/<h1[\s>]/i.test(html)) warnings.push(`${rel}: missing h1`);
+  const canonicalMatch = html.match(/<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+  const isNoindex = /<meta\s+name=["']robots["'][^>]*noindex/i.test(html);
+  if (!canonicalMatch) errors.push(`${rel}: missing canonical URL`);
+  if (normalizedRel !== "404.html" && isNoindex && canonicalMatch?.[1] === `https://coldwaycomforts.com/${normalizedRel}`) {
+    errors.push(`${rel}: noindex page should consolidate to a useful canonical`);
+  }
   if (!/<link\s+rel=["']icon["'][^>]+href=["']\/favicon\.ico["']/i.test(html)) {
     errors.push(`${rel}: missing root favicon.ico link`);
   }

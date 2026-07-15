@@ -1030,9 +1030,12 @@ h1 span {
   .fixed-actions button,
   .fixed-actions a {
     justify-content: center;
-    padding: 12px 8px;
+    min-width: 0;
+    padding: 12px 5px;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.15;
+    white-space: nowrap;
   }
 
   body {

@@ -6,6 +6,8 @@
   "scripts": {
     "build": "echo 'Static website ready in repository root.'",
     "build:sitemaps": "node scripts/build-sitemaps.mjs",
+    "seo:consolidate": "node scripts/consolidate-location-pages.mjs",
+    "seo:commercial": "node scripts/enhance-commercial-page.mjs",
     "pages:count": "find . -name '*.html' -not -path './.git/*' | wc -l",
     "test:site": "node scripts/check-site.mjs"
   }
