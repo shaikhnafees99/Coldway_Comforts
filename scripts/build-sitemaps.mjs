@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const baseUrl = "https://coldwaycomforts.com";
-const defaultLastmod = "2026-07-15";
+const defaultLastmod = "2026-07-16";
 const htmlFiles = [];
 const localServiceSlugs = [
   "doorstep-ac-refrigerator-service",
@@ -91,6 +91,7 @@ const pages = htmlFiles
 const groups = new Map([
   ["sitemap-core.xml", []],
   ["sitemap-areas.xml", []],
+  ["sitemap-guides.xml", []],
   ["sitemap-services.xml", []],
 ]);
 
@@ -99,6 +100,8 @@ for (const rel of pages) {
     groups.get("sitemap-areas.xml").push(urlEntry(pageUrl(rel), "0.7"));
   } else if (rel.startsWith("service/")) {
     groups.get("sitemap-services.xml").push(urlEntry(pageUrl(rel), "0.8"));
+  } else if (rel.startsWith("guides/")) {
+    groups.get("sitemap-guides.xml").push(urlEntry(pageUrl(rel), "0.7"));
   } else if (rel.startsWith("local/")) {
     const basename = path.basename(rel, ".html");
     const serviceSlug = localServiceSlugs.find((slug) => basename.startsWith(`${slug}-`));
@@ -114,7 +117,7 @@ for (const rel of pages) {
 const sitemapFiles = [...groups.entries()]
   .filter(([, entries]) => entries.length)
   .sort(([a], [b]) => {
-    const order = ["sitemap-core.xml", "sitemap-services.xml", "sitemap-areas.xml"];
+    const order = ["sitemap-core.xml", "sitemap-services.xml", "sitemap-guides.xml", "sitemap-areas.xml"];
     const aIndex = order.indexOf(a);
     const bIndex = order.indexOf(b);
     if (aIndex !== -1 || bIndex !== -1) return (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex);

@@ -20,6 +20,20 @@ const areas = new Map([
   ["dockyard-road", "Dockyard Road"],
   ["reay-road", "Reay Road"],
   ["nagpada", "Nagpada"],
+  ["dadar", "Dadar"],
+  ["parel", "Parel"],
+  ["worli", "Worli"],
+  ["lower-parel", "Lower Parel"],
+  ["sion", "Sion"],
+  ["chembur", "Chembur"],
+  ["bandra", "Bandra"],
+  ["andheri", "Andheri"],
+  ["vashi", "Vashi"],
+  ["nerul", "Nerul"],
+  ["airoli", "Airoli"],
+  ["cbd-belapur", "CBD Belapur"],
+  ["kharghar", "Kharghar"],
+  ["panvel", "Panvel"],
 ]);
 const serviceSlugs = [
   "doorstep-ac-refrigerator-service",
@@ -94,8 +108,10 @@ for (const filename of readdirSync(path.join(root, "local")).filter((name) => na
 
 const areasFile = path.join(root, "areas.html");
 let areasHtml = readFileSync(areasFile, "utf8");
+const areaCount = areas.size;
+const focusedLocalCount = areas.size * serviceSlugs.length;
 const areasTitle = "AC Service Areas in Mumbai | Coldway Comforts";
-const areasDescription = "Doorstep AC repair, commercial AC maintenance and refrigerator service across 16 genuine South and Central Mumbai service areas.";
+const areasDescription = `Doorstep AC repair, commercial AC maintenance and refrigerator service across ${areaCount} genuine Mumbai and Navi Mumbai service areas.`;
 areasHtml = areasHtml.replace(
   /<div class="area-cloud">.*?<\/div>/,
   `<div class="area-cloud priority-areas">${areaLinks()}</div>`,
@@ -114,8 +130,8 @@ areasHtml = areasHtml
     "Coldway Comforts covers homes, offices, shops, clinics, restaurants, showrooms and commercial spaces across South Mumbai, Central Mumbai and nearby Navi Mumbai service routes. Use the area finder below to reach the right AC service near me page for AC repair, commercial AC maintenance, cassette AC, tower AC, central AC and refrigerator support.",
     "Coldway Comforts serves homes, offices, shops, clinics, restaurants, showrooms and commercial spaces across the listed South and Central Mumbai neighborhoods. Search a genuine area below for AC repair, commercial AC maintenance, cassette AC, tower AC, central AC and refrigerator support. For other Mumbai or Navi Mumbai routes, call with the exact location so availability can be confirmed.",
   )
-  .replaceAll("<b>420</b>Area Pages Listed", "<b>16</b>Genuine Area Pages")
-  .replaceAll("Showing 420 service areas", "Showing 16 service areas")
+  .replace(/<b>\d+<\/b>Genuine Area Pages/g, `<b>${areaCount}</b>Genuine Area Pages`)
+  .replace(/Showing \d+ service areas/g, `Showing ${areaCount} service areas`)
   .replace(
     "Find the nearest Coldway Comforts area page for AC service, AC repair, commercial AC work and refrigerator service in Mumbai and Navi Mumbai.",
     "Search the listed neighborhood pages for AC service, AC repair, commercial AC work and refrigerator service near your location.",
@@ -125,8 +141,8 @@ areasHtml = areasHtml
     "Every area link leads to a dedicated AC service near me page with its own title, description, service schema, phone number and related service links. Search your area, then open the matching page for AC repair, commercial AC service, refrigerator service and other cooling support.",
     "Each neighborhood page keeps the phone numbers, available cooling services and related service links together. Choose the closest listed area, then open the relevant AC repair, commercial AC or refrigerator service page.",
   )
-  .replaceAll("<b>420</b>service areas listed", "<b>16</b>genuine areas listed")
-  .replaceAll("<b>5,051</b>local service pages", "<b>176</b>focused service pages")
+  .replace(/<b>\d+<\/b>genuine areas listed/g, `<b>${areaCount}</b>genuine areas listed`)
+  .replace(/<b>[\d,]+<\/b>focused service pages/g, `<b>${focusedLocalCount}</b>focused service pages`)
   .replace("<h2>Browse Every Area</h2>", "<h2>Browse Service Areas</h2>")
   .replace(
     "These links now come directly from the live area pages in the website folder, so no generated area is left out.",
