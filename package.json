@@ -10,6 +10,7 @@
     "seo:commercial": "node scripts/enhance-commercial-page.mjs",
     "seo:commercial-services": "node scripts/generate-commercial-services.mjs",
     "seo:request-service": "node scripts/generate-request-service.mjs",
+    "seo:search-content": "node scripts/generate-search-content.mjs",
     "seo:areas": "node scripts/generate-genuine-areas.mjs",
     "seo:guides": "node scripts/generate-guides.mjs",
     "pages:count": "find . -name '*.html' -not -path './.git/*' | wc -l",

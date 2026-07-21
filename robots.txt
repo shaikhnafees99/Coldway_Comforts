@@ -4,6 +4,8 @@ Sitemap: https://coldwaycomforts.com/sitemap.xml
 Sitemap: https://coldwaycomforts.com/sitemap-core.xml
 Sitemap: https://coldwaycomforts.com/sitemap-services.xml
 Sitemap: https://coldwaycomforts.com/sitemap-guides.xml
+Sitemap: https://coldwaycomforts.com/sitemap-solutions.xml
+Sitemap: https://coldwaycomforts.com/sitemap-brands.xml
 Sitemap: https://coldwaycomforts.com/sitemap-areas.xml
 Sitemap: https://coldwaycomforts.com/sitemap-local-ac-service.xml
 Sitemap: https://coldwaycomforts.com/sitemap-local-ac-repair.xml

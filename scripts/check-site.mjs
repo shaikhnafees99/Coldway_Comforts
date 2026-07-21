@@ -135,6 +135,11 @@ for (const file of htmlFiles) {
     if (!schemaNodes.some((node) => nodeHasType(node, "FAQPage"))) errors.push(`${rel}: missing FAQ schema`);
   }
 
+  if (/^(brands|solutions)\//.test(normalizedRel)) {
+    if (!schemaNodes.some((node) => nodeHasType(node, "Article"))) errors.push(`${rel}: missing Article schema`);
+    if (!schemaNodes.some((node) => nodeHasType(node, "FAQPage"))) errors.push(`${rel}: missing FAQ schema`);
+  }
+
   for (const match of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)) {
     const target = normalizeLink(match[1], file);
     if (target && !existsSync(target)) {
