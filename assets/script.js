@@ -31,6 +31,24 @@ END:VCARD`;
   URL.revokeObjectURL(url);
 }
 
+function sendServiceRequest(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const details = [
+    'Hello Coldway Comforts, I need service support.',
+    `Name: ${data.get('name') || '-'}`,
+    `Phone: ${data.get('phone') || '-'}`,
+    `Area: ${data.get('area') || '-'}`,
+    `Service: ${data.get('service') || '-'}`,
+    `Property: ${data.get('property') || '-'}`,
+    `Number of units: ${data.get('units') || '-'}`,
+    `Requirement: ${data.get('message') || '-'}`
+  ];
+
+  window.location.href = `https://wa.me/919819213075?text=${encodeURIComponent(details.join('\n'))}`;
+}
+
 function initAreaSearch() {
   const input = document.getElementById('areaSearch');
   const list = document.querySelector('.all-areas');

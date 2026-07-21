@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const baseUrl = "https://coldwaycomforts.com";
-const defaultLastmod = "2026-07-16";
+const defaultLastmod = new Date().toISOString().slice(0, 10);
 const htmlFiles = [];
 const localServiceSlugs = [
   "doorstep-ac-refrigerator-service",

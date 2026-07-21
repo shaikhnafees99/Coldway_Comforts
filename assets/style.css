@@ -1129,3 +1129,80 @@ h1 span {
     padding-inline: 6px;
   }
 }
+
+.quote-band {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.quote-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quote-field {
+  display: grid;
+  gap: 7px;
+}
+
+.quote-field.full,
+.quote-submit {
+  grid-column: 1 / -1;
+}
+
+.quote-field label {
+  color: #173456;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.quote-field input,
+.quote-field select,
+.quote-field textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #bdd4da;
+  border-radius: 6px;
+  background: #fff;
+  color: #142033;
+  font: inherit;
+  padding: 11px 12px;
+}
+
+.quote-field textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.quote-field input:focus,
+.quote-field select:focus,
+.quote-field textarea:focus {
+  border-color: #0497a7;
+  box-shadow: 0 0 0 3px rgba(4, 151, 167, .14);
+  outline: 0;
+}
+
+.quote-note {
+  color: #526578;
+  font-size: 13px;
+  margin: 0;
+}
+
+.quote-submit .btn {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .quote-band,
+  .quote-form {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-field.full,
+  .quote-submit {
+    grid-column: auto;
+  }
+}
