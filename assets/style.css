@@ -1206,3 +1206,163 @@ h1 span {
     grid-column: auto;
   }
 }
+
+/* Trust & Review Badges */
+.google-rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  color: #102033;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  margin-bottom: 16px;
+  border: 1px solid #e1f0f4;
+}
+
+.google-rating-badge .stars {
+  color: #f4b400;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.google-rating-badge .count {
+  color: #526578;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Rate Card & Transparent Pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.price-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #d8eaee;
+  padding: 24px;
+  position: relative;
+  box-shadow: var(--soft-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: #0497a7;
+}
+
+.price-card.popular {
+  border: 2px solid #0497a7;
+  background: linear-gradient(180deg, #ffffff 0%, #f4fafb 100%);
+}
+
+.price-card .popular-tag {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #0497a7;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.price-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.price-card .price {
+  font-size: 32px;
+  font-weight: 900;
+  color: #0b7180;
+  margin-bottom: 14px;
+}
+
+.price-card .price span {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.price-card ul li {
+  padding: 8px 0;
+  border-bottom: 1px dashed #e6f0f3;
+  font-size: 14px;
+  color: #2b3e54;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-card ul li::before {
+  content: "✓";
+  color: #0bb3bd;
+  font-weight: 900;
+}
+
+/* Mobile Floating CTA Bar */
+.sticky-mobile-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  background: #ffffff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  border-top: 1px solid #d6e6eb;
+}
+
+.sticky-mobile-cta a,
+.sticky-mobile-cta button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sticky-mobile-cta .btn-call {
+  background: #0497a7;
+  color: #ffffff;
+}
+
+.sticky-mobile-cta .btn-wa {
+  background: #25d366;
+  color: #ffffff;
+}
+
+@media (min-width: 769px) {
+  .sticky-mobile-cta {
+    display: none;
+  }
+}
+
